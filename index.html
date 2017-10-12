@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Marvel Trivia</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="assets/javascript/app.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+</head>
+
+<body>
+	<div id="splashPage">
+		<div class="splashBox">
+			<h1>Marvel Trivia!</h1>
+			<button type="button" id="startButton" class="btn btn-success">Click to start</button>
+		</div>
+	</div>
+
+	<div id="answerScreen">
+		<div class="splashBox2">
+			<h2>Result</h2>
+			<br><br>
+			<p id="correct">Correct: </p>
+			<p id="wrong">Wrong: </p>
+		</div>	
+	</div>
+
+	<div id="timesUp">
+		<div class="wrongBox">
+			<h2 class="up">Time's up!</h2>
+
+			<p> Score: </p>
+			<p id="correctTimesUp">Correct: </p>
+			<p id="wringTimesUp">Wrong: </p>
+		</div>
+	</div>
+
+	<div class="container">
+		<header>Marvel Trivia!</header>
+		<div class="row timeRemain">Time Remaining: <div id="time-remain">60</div>
+	</div>
+
+	<div class="questions">
+		<button type="button" class="btn btn-primary black-background white" id="submit">Submit</button>
+
+	</div>
+	
+
+	
+
+</body>
+</html>
