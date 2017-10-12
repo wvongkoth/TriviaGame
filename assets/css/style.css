@@ -4,8 +4,9 @@ body {
 
 h1 {
 	font-size: 80px;
-	color: blue;
+	color: red;
 	font-family: 'Permanent Marker', cursive;
+	text-align: center;
 }
 
 .btn {
@@ -13,7 +14,7 @@ h1 {
 	font-size: 50px;
 }
 
-#splashPage {
+.trivSection {
 	background: grey;
 	text-align: center;
 	height: 500px;

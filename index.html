@@ -1,56 +1,51 @@
 <!DOCTYPE html>
-
-<html lang="en-us">
-
+<html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>Marvel Trivia</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script type="text/javascript" src="assets/javascript/app.js"></script>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
+      <script type="text/javascript" src="game.js"></script>
+    <title>game</title>
 </head>
-
 <body>
-	<div id="splashPage">
-		<div class="splashBox">
-			<h1>Marvel Trivia!</h1>
-			<button type="button" id="startButton" class="btn btn-success">Click to start</button>
-		</div>
-	</div>
-
-	<div id="answerScreen">
-		<div class="splashBox2">
-			<h2>Result</h2>
-			<br><br>
-			<p id="correct">Correct: </p>
-			<p id="wrong">Wrong: </p>
-		</div>	
-	</div>
-
-	<div id="timesUp">
-		<div class="wrongBox">
-			<h2 class="up">Time's up!</h2>
-
-			<p> Score: </p>
-			<p id="correctTimesUp">Correct: </p>
-			<p id="wringTimesUp">Wrong: </p>
-		</div>
-	</div>
-
-	<div class="container">
-		<header>Marvel Trivia!</header>
-		<div class="row timeRemain">Time Remaining: <div id="time-remain">60</div>
-	</div>
-
-	<div class="questions">
-		<button type="button" class="btn btn-primary black-background white" id="submit">Submit</button>
-
-	</div>
-	
-
-	
-
+    <div class="jumbotron">
+      <h1>GOT Trivia!</h1>
+      <p class="headertext">  Winter is Coming</p>
+      <p><a id="start" class="btn btn-primary btn-lg" href="#" role="button">Start The Game!</a></p>
+    </div>
+    <!-- *<div class="col-lg-1"></div> -->
+    <div class="col-lg-5">
+    <p id="directions">Directions: You have 15 seconds to show off your knowledge of Games Of Thrones! Click the start button to get started #WinterIsComing </p>
+    <div id="clockStart">
+        <div id="timer">Time Left = <span id="timerDisplay"> </span></div>
+        
+    </div>
+    </div>
+    <div class="col-lg-5">
+    <div id="allOptions">
+        <div id="question"></div><br>
+        <div id="choice1" class="choice correct"></div><br>
+        <div id="choice2" class="choice incorrect"></div><br>
+        <div id="choice3" class="choice incorrect"></div><br>
+        <div id="choice4" class="choice incorrect"></div><br>
+    </div>
+        <div id="correctDiv" style="display:none">You are correct!</div>
+        <div id="incorrectDiv" style="display:none">
+            You are incorrect! <span id="userWrongChoice"> </span>
+            The correct answer is: <span id="correctAnswer"></span>
+    </div>
+    <div id="gameDone" style="display:none">
+        <div>Correct Answers: <span id="correctCount"></span></div>
+        <div>Incorrect Answers: <span id="incorrectCount"></span></div>    
+    </div>
+    <div id="resetGame" style="display:none">
+        <p>play again? If so - click the reset button!</p>
+        <button id="resetButton">Reset</button>
+    </div>
+    </div>
+    <div class="col-lg-1"></div>
 </body>
 </html>
