@@ -4,9 +4,9 @@ $(window).ready(function() {
 	var timeout;
 	var	gameBreak;
 	var gameClock;
-		userScore = 0;
-		incorrectGuesses = 0;
-		questionArray = ["Which of the following is NOT a family in Game of Thrones?",
+	var	userScore = 0;
+	var	incorrectGuesses = 0;
+	var	questionArray = ["Which of the following is NOT a family in Game of Thrones?",
 
 		"In the first episode of season 1, who accidentally discovers Queen Cersei's secret?", 
 
@@ -26,13 +26,13 @@ $(window).ready(function() {
 
 		"Who said this memorable line: “Give my regards to the Night’s Watch. I’m sure it will be thrilling. And if it’s not, it’s only for life.”"];
 
-		correctAnswerArray = ["Mortensen", "Bran Stark", "Catelyn Stark", "Crossbow", "Jaime Lannister", "Dogs", "Ygritte", "Master of Coin", "Ice", "Tortures him in many ways."];
+	var	correctAnswerArray = ["Mortensen", "Bran Stark", "Catelyn Stark", "Crossbow", "Jaime Lannister", "Dogs", "Ygritte", "Master of Coin", "Ice", "Tortures him in many ways."];
 		
-		choice2Array = ["Stark", "Arya Starh", "Sansa Stark", "Poison", "Eddard Stark", "Birds of prey", "Lord Commander of the Kingsguard", "Dogs", "Threatens to Kill Himself", "Young Masta"];
+	var	choice2Array = ["Stark", "Arya Starh", "Sansa Stark", "Poison", "Eddard Stark", "Birds of prey", "Lord Commander of the Kingsguard", "Dogs", "Threatens to Kill Himself", "Young Masta"];
 		
-		choice3Array = ["Tyrell", "Joffry Baratheon", "Talisa Stark", "Sword", "Joffrey Baratheon", "White Walkers", "Cersei Lannister", "Master of War", "Drogo", "Threatens to kill Theon baby sister."];
+	var	choice3Array = ["Tyrell", "Joffry Baratheon", "Talisa Stark", "Sword", "Joffrey Baratheon", "White Walkers", "Cersei Lannister", "Master of War", "Drogo", "Threatens to kill Theon baby sister."];
 		
-		choice4Array = ["Bolton", "Tyrion Lannister", "Arya Stark", "Mace", "Sandor Clegane", "Direwolves", "Daenerys Targaryen", "Master of Ships", "Needle", "Asks nicely"];
+	var	choice4Array = ["Bolton", "Tyrion Lannister", "Arya Stark", "Mace", "Sandor Clegane", "Direwolves", "Daenerys Targaryen", "Master of Ships", "Needle", "Asks nicely"];
 	
 	var i = 0;
 
@@ -52,6 +52,12 @@ $(window).ready(function() {
 		 },
 
 		startGame: function() {
+			$("#timer").css("display", "initial");
+				$("#allOptions").css("display", "initial");
+				$("#question").css("display", "initial");
+				$(".choice").css("display", "initial");
+				$("#gameDone").css("display", "none");
+				$('#resetGame').css("display", "none");
 			triviaGame.start();
 		},
 
@@ -65,7 +71,7 @@ $(window).ready(function() {
 			gameClock=15;
 			timer = true;
 
-			var intervalClock = setInterval(function() {
+			 intervalClock = setInterval(function() {
 				gameClock-=1;
 				$("#timerDisplay").text(triviaGame.timeConverter(gameClock));
 				if (gameClock<=0) {
@@ -87,7 +93,7 @@ $(window).ready(function() {
 				console.log("The value of i is: " + i);
 			} else {
 				timer=false;
-				$("#timer").text("display", "none");
+				$("#timer").css("display", "none");
 				$("#allOptions").css("display", "none");
 				$("#question").css("display", "none");
 				$(".choice").css("display", "none");
@@ -95,7 +101,15 @@ $(window).ready(function() {
 				$("#correctCount").text(userScore);
 				$("#incorrectCount").text(incorrectGuesses);
 				$("#resetGame").css("display", "initial");
+			$('#resetButton').on('click', function() {
+				gameClock = 15;
+				timerRunning = true;
+				userScore = 0;
+				incorrectGuesses = 0;
+				i=0;
+				triviaGame.startGame();
 				
+			});				
 			};
 			
 		},
@@ -103,48 +117,47 @@ $(window).ready(function() {
 		pickAnswer: function() {
 			$(".choice").on('click', function () {
 				timer = false;
-				userScore++;
-				$("#allOptions").css("display", "none");
-				$("#correctDiv").css("display", "initial")
-				function timeout() {
-					$("#correctDiv").css("display", "none");
-					$("#allOptions").css("display", "initial");
-				};
-				var gameBreak = setTimeout(timeout, 1000);
-				i++;
-				gameClock = 15;
-				triviaGame.questionLoop();
+				console.log($(this).text());
+				var userSelection =  $(this).text();
+					if(userSelection === correctAnswerArray[i]){
+										userScore++;
+						$("#allOptions").css("display", "none");
+						$("#correctDiv").css("display", "initial")
+					function timeout() {
+						$("#correctDiv").css("display", "none");
+						$("#allOptions").css("display", "initial");
+					};
+						gameBreak = setTimeout(timeout, 1000);
+						i++;
+						gameClock = 15;
+						triviaGame.questionLoop();
+					}
+					else {
+						timer = false;
+						incorrectGuesses++;
+						$("#correctAnswer").text(correctAnswerArray[i]);
+						$("#allOptions").css("display", "none");
+						$("#incorrectDiv").css("display", "initial");
+							function timeout() {
+							$("#incorrectDiv").css("display", "none");
+							$("#allOptions").css("display", "initial");
+						};
+						 gameBreak = setTimeout(timeout, 1000);
+						i++;
+						gameClock = 15;
+						triviaGame.questionLoop();						
+					};
+
+
 			});
 
-			$(".choice").on("click", function() {
-				timer = false;
-				incorrectGuesses++;
-				$("#correctAnswer").text(correctAnswerArray[i]);
-				$("#allOptions").css("display", "none");
-				$("#incorrectDiv").css("display", "initial");
-					function timeout() {
-					$("#incorrectDiv").css("display", "none");
-					$("#allOptions").css("display", "initial");
-				};
-				var gameBreak = setTimeout(timeout, 1000);
-				i++;
-				gameClock = 15;
-				triviaGame.questionLoop();
-			});
+			// $(".choice").on("click", function() {
+
+			// });
 		},
 
-			restartGame: function() {
-			$('#resetGame').on('click', function() {
-				gameClock = 15;
-				timerRunning = true;
-				userScore = 0;
-				incorrectGuesses = 0;
-				i=0;
-				
-			})
-		}
 
-			
+
 		
 	};
 triviaGame.startGame();
