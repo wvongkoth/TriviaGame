@@ -2,12 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <link rel="stylesheet" type="text/css" href="reset.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
+    
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
-      <script type="text/javascript" src="game.js"></script>
+    <script type="text/javascript" src="assets/javascript/app.js"></script>
     <title>game</title>
 </head>
 <body>
@@ -16,7 +15,7 @@
       <p class="headertext">  Winter is Coming</p>
       <p><a id="start" class="btn btn-primary btn-lg" href="#" role="button">Start The Game!</a></p>
     </div>
-    <!-- *<div class="col-lg-1"></div> -->
+    
     <div class="col-lg-5">
     <p id="directions">Directions: You have 15 seconds to show off your knowledge of Games Of Thrones! Click the start button to get started #WinterIsComing </p>
     <div id="clockStart">
@@ -27,19 +26,19 @@
     <div class="col-lg-5">
     <div id="allOptions">
         <div id="question"></div><br>
-        <div id="choice1" class="choice correct"></div><br>
-        <div id="choice2" class="choice incorrect"></div><br>
-        <div id="choice3" class="choice incorrect"></div><br>
-        <div id="choice4" class="choice incorrect"></div><br>
+        <div id="choice1" class="choice"></div><br>
+        <div id="choice2" class="choice"></div><br>
+        <div id="choice3" class="choice"></div><br>
+        <div id="choice4" class="choice"></div><br>
     </div>
-        <div id="correctDiv" style="display:none">You are correct!</div>
-        <div id="incorrectDiv" style="display:none">
+        <div id="correctDiv" style= "display:none">You are correct!</div>
+        <div id="incorrectDiv" style= "display:none">
             You are incorrect! <span id="userWrongChoice"> </span>
             The correct answer is: <span id="correctAnswer"></span>
     </div>
     <div id="gameDone" style="display:none">
         <div>Correct Answers: <span id="correctCount"></span></div>
-        <div>Incorrect Answers: <span id="incorrectCount"></span></div>    
+        <div>Incorrect Answers: <span id="incorrectCount"></span></div> 
     </div>
     <div id="resetGame" style="display:none">
         <p>play again? If so - click the reset button!</p>

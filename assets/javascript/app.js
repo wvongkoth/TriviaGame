@@ -1,86 +1,151 @@
-$(document).ready(function(){
-	var trivTime = 0;
-	var correct = 0;
-	var wrong = 0;
-	var qACount = 1;
-	var timer = '';
+$(window).ready(function() {
+	var timer = false;
+	var	intervalClock;
+	var timeout;
+	var	gameBreak;
+	var gameClock;
+		userScore = 0;
+		incorrectGuesses = 0;
+		questionArray = ["Which of the following is NOT a family in Game of Thrones?",
 
+		"In the first episode of season 1, who accidentally discovers Queen Cersei's secret?", 
 
-	var questions = {
-	1:{
-		ques: "Who is Iron Man?",
-		choices: ["Tony Stark", "Arnold Palmer", "Michael Jordan"],
-		name: "ironMan",
-		ans: "Tony Stark",
-	},
-	2:{
-		ques: "Who is Steve Rogers?",
-		choices: ["Wolverine", "The Incredible Hulk", "Captain America"],
-		name: "captAmerica",
-		ans: "Captain America",
-	},
-	3:{
-		ques: "What was the first cover date for The Fantastic 4?",
-		choices: ["1961", "1971", "1981"],
-		name: "fantasticFour",
-		ans: "1961",
-	},
-	4:{
-		ques: "Who created Marvel?",
-		choices: ["Stan Lee", "Malcolm Wheeler-Nicholson", "Martin Goodman"],
-		name: "marvelCreator",
-		ans: "Martin Goodman",
-	}
-}
+		"Who is Robb Stark's mother?",
 
-	//start button to display questions
-	var start = function(){
-		$('#startButton').on("click", function(){
-			$('.trivSection').empty();
-			createQuestions();
-		});
-	}
+		"What does Tyrion murder his father with?", 
 
-	var createQuestions = function(){
-		timerStart();
+		"Who is known as The Kingslayer?", 
 
-		var questionDisplay = questions[qACount]['ques'];
+		"What murders Lady Walda and her child?",
 
-		var newDiv = $('<div>');
+		"Who said this memorable line: You know nothing, Jon Snow?", 
 
-		newDiv.addClass("question");
-		newDiv.text(question);
-		$('.trivSection').append(newDiv);
-		createAnswers();
-	}
+		"What is the name of the ancestral Stark sword that Tywin Lannister oversees the reforging of in the first episode of season 3?",
 
-	var createAnswers = function(){
-		var answerLength = questions[QACount]['choices'].length;
-		for(var i = 0; i < answerLength; i++){
-			var answers = questions[qACount]['choices'][i];
-			var newBtn = $('<button>');
-			newBtn.addClass('answers redBtn');
-			newBtn.attr('data-type', choices);
-			newBtn.text(answers);
-			$('.trivSection').append(newBtn);
+		"What does Ramsay Bolton do to Theon Greyjoy so that he will call himself 'Reek'?",
+
+		"Who said this memorable line: “Give my regards to the Night’s Watch. I’m sure it will be thrilling. And if it’s not, it’s only for life.”"];
+
+		correctAnswerArray = ["Mortensen", "Bran Stark", "Catelyn Stark", "Crossbow", "Jaime Lannister", "Dogs", "Ygritte", "Master of Coin", "Ice", "Tortures him in many ways."];
+		
+		choice2Array = ["Stark", "Arya Starh", "Sansa Stark", "Poison", "Eddard Stark", "Birds of prey", "Lord Commander of the Kingsguard", "Dogs", "Threatens to Kill Himself", "Young Masta"];
+		
+		choice3Array = ["Tyrell", "Joffry Baratheon", "Talisa Stark", "Sword", "Joffrey Baratheon", "White Walkers", "Cersei Lannister", "Master of War", "Drogo", "Threatens to kill Theon baby sister."];
+		
+		choice4Array = ["Bolton", "Tyrion Lannister", "Arya Stark", "Mace", "Sandor Clegane", "Direwolves", "Daenerys Targaryen", "Master of Ships", "Needle", "Asks nicely"];
+	
+	var i = 0;
+
+	var triviaGame = {
+		timeConverter: function(time) {
+
+		    // (mm:ss)
+		    var minutes = Math.floor(time / 60);
+		    var seconds = time - (minutes * 60);
+
+		    if (seconds < 10) {
+		      seconds = "0" + seconds;
+		    }
+
+		    return minutes + ":" + seconds;
+
+		 },
+
+		startGame: function() {
+			triviaGame.start();
+		},
+
+		start: function () {
+			$("#start").on("click", function() {	
+				triviaGame.startInterval();
+			});
+		},
+
+		startInterval: function () {
+			gameClock=15;
+			timer = true;
+
+			var intervalClock = setInterval(function() {
+				gameClock-=1;
+				$("#timerDisplay").text(triviaGame.timeConverter(gameClock));
+				if (gameClock<=0) {
+					timer = false;
+					incorrectGuesses++;
+				};
+			}, 1000);
+			triviaGame.questionLoop();
+			triviaGame.pickAnswer();
+			},
+
+		questionLoop: function() {
+			if (i < questionArray.length) {
+				$("#question").text(questionArray[i]);
+				$("#choice1").text(correctAnswerArray[i]);
+				$("#choice2").text(choice2Array[i]);
+				$("#choice3").text(choice3Array[i]);
+				$("#choice4").text(choice4Array[i]);
+				console.log("The value of i is: " + i);
+			} else {
+				timer=false;
+				$("#timer").text("display", "none");
+				$("#allOptions").css("display", "none");
+				$("#question").css("display", "none");
+				$(".choice").css("display", "none");
+				$("#gameDone").css("display", "initial");
+				$("#correctCount").text(userScore);
+				$("#incorrectCount").text(incorrectGuesses);
+				$("#resetGame").css("display", "initial");
+				
+			};
+			
+		},
+
+		pickAnswer: function() {
+			$(".choice").on('click', function () {
+				timer = false;
+				userScore++;
+				$("#allOptions").css("display", "none");
+				$("#correctDiv").css("display", "initial")
+				function timeout() {
+					$("#correctDiv").css("display", "none");
+					$("#allOptions").css("display", "initial");
+				};
+				var gameBreak = setTimeout(timeout, 1000);
+				i++;
+				gameClock = 15;
+				triviaGame.questionLoop();
+			});
+
+			$(".choice").on("click", function() {
+				timer = false;
+				incorrectGuesses++;
+				$("#correctAnswer").text(correctAnswerArray[i]);
+				$("#allOptions").css("display", "none");
+				$("#incorrectDiv").css("display", "initial");
+					function timeout() {
+					$("#incorrectDiv").css("display", "none");
+					$("#allOptions").css("display", "initial");
+				};
+				var gameBreak = setTimeout(timeout, 1000);
+				i++;
+				gameClock = 15;
+				triviaGame.questionLoop();
+			});
+		},
+
+			restartGame: function() {
+			$('#resetGame').on('click', function() {
+				gameClock = 15;
+				timerRunning = true;
+				userScore = 0;
+				incorrectGuesses = 0;
+				i=0;
+				
+			})
 		}
-	}
 
-	var timerStart = function(){ 
-		$('.timerSection').empty();
-		//Sets time to 10
-		trivTime = 100;
-		//Progress Bar
-		var timeTag = $('<div>');
-		timeTag.addClass('time');
-		timeTag.addClass('progress');
-		var progressBar = $('<div>');
-		progressBar.addClass('progress-bar');
-		progressBar.width(trivTime + '%');
-
-		$('.timerSection').append(timeTag);
-		$('.time').append(progressBar);	
-		//Decrements Time
-		timer = setInterval(timeDecrement,100);
-}
+			
+		
+	};
+triviaGame.startGame();
 });

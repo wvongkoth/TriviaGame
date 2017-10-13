@@ -1,24 +1,30 @@
-body {
-	background: url("../images/marvel.jpg");
-}
-
-h1 {
-	font-size: 80px;
-	color: red;
-	font-family: 'Permanent Marker', cursive;
+.jumbotron {
 	text-align: center;
+	background-image: url("https://tyrionlannister.net/wp-content/uploads/2015/04/ghost-game-of-thrones-twitter-header-copy.png");
+	background-height: 800px;
+	height: 400px;
+	font color: white;
 }
 
-.btn {
-	margin-top: 100px;
-	font-size: 50px;
-}
-
-.trivSection {
-	background: grey;
+.choice {
+	border: 2px black solid;
+	border-radius: 20%;
 	text-align: center;
-	height: 500px;
-	padding-top: 100px;
-	margin-top: 100px;
+	width: 150px;
 }
+
+.choice:hover {
+	cursor: pointer;
+	font-weight: bolder;
+	width: 170px;
+	height: 40px;
+}
+
+
+.headertext {
+	color: white;
+	
+}
+
+
 
